@@ -11,6 +11,9 @@ const forecast = require('./utils/forecast')
 //call express to start app
 const app = express()
 
+// set port based on Heroku value, or 3000 if not found
+const port = process.env.PORT || 3000
+
 // serve up the public directory 
 const publicDirectoryPath = path.join(__dirname, '../public')
 
@@ -93,7 +96,7 @@ app.get('/products', (req, res) => {
 app.get('/help/*', (req, res) => {
     res.render('404', {
         title: '404',
-        name: 'Andrew Mead',
+        name: 'ChrisCat',
         errorMessage: 'Help article not found.'
     })
 })
@@ -101,151 +104,11 @@ app.get('/help/*', (req, res) => {
 app.get('*', (req, res) => {
     res.render('404', {
         title: '404',
-        name: 'Andrew Mead',
+        name: 'ChrisCat',
         errorMessage: 'Page not found.'
     })
 })
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000.')
+app.listen(port, () => {
+    console.log('Server is up on port ' + port)
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //render a handlebar template.
-// app.get('', (req, res) => {
-//     res.render('index', {
-//         title:'Weather App',
-//         name: ' Chris Cat'
-//     })
-// })
-
-// app.get('/about', (req, res) => {
-//     res.render('about', {
-//         title: 'About Me',
-//         name: 'Chris CatZ'
-//     })
-// })
-
-
-// app.get('/weather', (req, res) => {
-//     if(!req.query.address){
-//         return res.send({
-//             error: 'you must provide an address'
-//         })
-//     }
-
-
-//     geocode(req.query.address, (error, latitude, longitude) =>{
-//         if(error){
-//             return res.send({ error })
-//         }
-
-//         forecast(latitude, longitude, (error, forecastData) => {
-//             if (error){
-//                 return res.send({ error })
-//             }
-
-//             res.send({
-//                 forecast: forecastData,
-//                 location,
-//                 address: req.query.address
-//             })
-//         })
-//     })
-// })
-
-
-// app.get('/products', (req, res) => {
-//     if(!req.query.search){
-//         return res.send({
-//             error: 'you must provide search'
-//         })
-//     }
-
-
-//     console.log(req.query)
-//     res.send({
-//         products: []
-//     })
-// })
-// app.get('/help', (req, res) => {
-//     res.render('help', {
-//         message:'There is currently an issue',
-//         title: 'Help',
-//         name: 'ChrisCat'
-//     })
-// })
-
-// app.get('/help/*',(req, res) => {
-//     res.render('404', {
-//         title: 'Missing Help',
-//         message: 'Help article not found'
-//     })
-// })
-
-// app.get('*', (req, res) => {
-//     res.render('404', {
-//         title: '404',
-//         message: 'Page not found'
-//     })
-// })
-// // spin up sever to listen on port
-// app.listen(3000, () => {
-//     console.log('Server up!!! Port 3000')
-// })
-
-
-
-
-
-
-
-
-
-
-
-//setup method to detrmine what a resource should do
-//function to run when it '' arg 
-// req = request res = resposne 
-
-// app.get('', (req, res) => {
-//     // send something back to requestor 
-//     res.send('<h1>Hello express!</h1>')
-// })
-
-// app.get('/help',(req, res) => {
-//     res.send([{
-//         product: 'tester'
-//     }, {
-//         product: 'tester2'
-//     }])
-// })
-
-// app.get('/about', (req, res) => {
-// //     res.send('<h1>ABOUT</h1>')
-// // })
-
-// //just need to see text in browser
-
-// app.get('/weather', (req, res) => {
-//     res.send([{
-//         forecast: 'Weather forecast'
-//     }, {
-//         location: 'LOCATION!'
-//     }])
-// })
-
-
-
